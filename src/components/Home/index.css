@@ -1,0 +1,25 @@
+.Home-container {
+  background-size: cover;
+  height: 90vh;
+  color: #ffffff;
+}
+.banner {
+  background-image: url("/home/workspace/cryptotrackerapp/src/Assets/Images/global-business-background.jpg");
+  background-size: cover;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.home-title {
+  padding: 10px;
+  font-size: 45px;
+  font-weight: bolder;
+  font-family: "Montserrat";
+}
+.home-banner-description {
+  color: "darkgrey";
+  font-family: "Montserrat";
+  text-transform: "capitalize";
+}
