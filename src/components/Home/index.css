@@ -4,7 +4,7 @@
   color: #ffffff;
 }
 .banner {
-  background-image: url("/home/workspace/cryptotrackerapp/src/Assets/Images/global-business-background.jpg");
+  background-image: url("/src/Assets/Images/global-business-background.jpg");
   background-size: cover;
   height: 400px;
   display: flex;

@@ -1,0 +1,34 @@
+.crypto-currency-list-container {
+  width: 100vw;
+
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.heading {
+  text-align: center;
+}
+.input-field-container {
+  width: 100%;
+  height: 40px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  border: 1.3px solid #ccc;
+}
+.input-field {
+  width: 97%;
+  height: 100%;
+  padding: 5px;
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 20px;
+  outline: none;
+  border: none;
+}
+.search-icon {
+  align-self: center;
+  width: fit-content;
+  font-size: 20px;
+  cursor: pointer;
+}

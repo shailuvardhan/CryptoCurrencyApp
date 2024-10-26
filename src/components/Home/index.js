@@ -1,4 +1,5 @@
 import Carousel from "../Carousel";
+import CryptoCurrencyList from "../CryptoCurrencyList";
 import "./index.css";
 
 const Home = () => (
@@ -10,6 +11,7 @@ const Home = () => (
       </p>
       <Carousel />
     </div>
+    <CryptoCurrencyList />
   </div>
 );
 

@@ -1,5 +1,42 @@
 .carousel-container {
+  width: 100vw;
   height: 50%;
   display: flex;
   align-items: center;
+}
+
+.carousel-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: white;
+  width: 200px;
+}
+.carousel-img {
+  height: 80px;
+  margin-bottom: 10px;
+}
+.percentage {
+  font-weight: 500;
+  font-size: 20px;
+}
+.green {
+  color: rgb(14, 203, 129);
+}
+.red {
+  color: red;
+}
+.price {
+  font-weight: 500;
+  font-size: 22px;
+}
+ul {
+  display: flex;
+  /* gap: 100px; */
+}
+li {
+  list-style-type: none;
+  width: fit-content;
 }
