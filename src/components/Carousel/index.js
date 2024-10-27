@@ -15,10 +15,16 @@ const Carousel = () => {
 
   const getTrendingData = async () => {
     // const { data } = await axios.get(TrendingCoins(currency));
-    const response = await fetch(TrendingCoins(currency));
-    const data = await response.json();
-
-    setTrending(data);
+    try {
+      const response = await fetch(TrendingCoins(currency));
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setTrending(data);
+    } catch (error) {
+      console.error("Failed to Fetch:-", error);
+    }
   };
 
   useEffect(() => {
@@ -33,8 +39,6 @@ const Carousel = () => {
   const items = trending.map((coin) => {
     let profit = coin.price_change_percentage_24h >= 0;
     let profitColor = profit > 0 ? "green" : "red";
-
-    console.log(coin);
 
     return (
       <Link to={`/coins/${coin.id}`} className="carousel-item">
