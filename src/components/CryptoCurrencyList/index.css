@@ -49,6 +49,8 @@
   font-size: 20px;
   height: 20px;
   margin-bottom: auto;
+  text-align: left;
+  padding-left: 10px;
 }
 
 .hr-line {
@@ -62,4 +64,39 @@
 .main-row {
   background-color: gold;
   color: black;
+}
+.row-value-item {
+  background-color: #16171a;
+  cursor: pointer;
+  font-family: "Montserrat";
+  border-bottom: 1.2px solid red;
+}
+.row-value-item:hover {
+  background-color: #131111;
+}
+
+.table-cell-img {
+  height: 60px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+.coin-cell {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin: 10px;
+}
+.table-cell-coin-text-container {
+  display: flex;
+  flex-direction: column;
+}
+.fetched-symbol {
+  font-size: 22px;
+}
+.fetched-name {
+  color: darkgray;
+  font-weight: normal;
+}
+.left {
+  padding-left: 50px;
 }

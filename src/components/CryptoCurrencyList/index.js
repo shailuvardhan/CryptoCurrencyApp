@@ -5,12 +5,14 @@ import { CryptoState } from "../../Context/CryptoContext";
 import { CoinList } from "../../config/api";
 import { useHistory } from "react-router-dom";
 
+import Pagination from "../Pagination";
 import "./index.css";
 
 const CryptoCurrencyList = () => {
   const [coinsList, setCoinsList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const { currency } = CryptoState();
+  const [perPage, setPerPage] = useState([]);
+  const { currency, symbol } = CryptoState();
   const history = useHistory();
 
   const getCryptoCurrencyList = async () => {
@@ -22,6 +24,7 @@ const CryptoCurrencyList = () => {
       }
       const fetchedData = await response.json();
       setCoinsList(fetchedData);
+      setPerPage(fetchedData.slice(0, 10));
     } catch (error) {
       console.error("failed to fetch:-", error);
     }
@@ -31,7 +34,6 @@ const CryptoCurrencyList = () => {
     getCryptoCurrencyList();
     // eslint-disable-next-line
   }, [currency]);
-  console.log(coinsList);
 
   const onChangeSearchInput = (event) => {
     setSearchInput(event.target.value);
@@ -40,10 +42,25 @@ const CryptoCurrencyList = () => {
   const onChangeSearchResults = () => {
     return coinsList.filter(
       (coin) =>
-        coin.name.toLowerCase().includes(searchInput) ||
-        coin.symbol.toLowerCase().includes(searchInput)
+        coin.name.toLowerCase().includes(searchInput.toLowerCase()) ||
+        coin.symbol.toLowerCase().includes(searchInput.toLowerCase())
     );
   };
+
+  const pageHandler = (pageNumber) => {
+    const filteredResults = onChangeSearchResults();
+    setPerPage(filteredResults.slice(pageNumber * 10 - 10, pageNumber * 10));
+  };
+
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  useEffect(() => {
+    const filteredResults = onChangeSearchResults();
+    setPerPage(filteredResults.slice(0, 10)); // Reset to first page
+    // eslint-disable-next-line
+  }, [searchInput, coinsList]);
 
   return (
     <div className="crypto-currency-list-container">
@@ -54,6 +71,7 @@ const CryptoCurrencyList = () => {
           placeholder="Search for a crypto currency here..."
           className="input-field"
           onChange={onChangeSearchInput}
+          value={searchInput}
         />
         <FaSearch className="search-icon" />
       </div>
@@ -62,24 +80,63 @@ const CryptoCurrencyList = () => {
           <thead className="main-row">
             <tr className="head-row">
               {["Coin", "Price", "24h Change", "Market Cap"].map((head) => (
-                <th className="head">{head}</th>
+                <th
+                  key={head}
+                  className={head === "Coin" ? "left head" : "head"}
+                >
+                  {head}
+                </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {onChangeSearchResults().map((coinRow) => {
+            {perPage.map((coinRow) => {
               let profit = coinRow.price_change_percentage_24h >= 0;
               let profitColor = profit > 0 ? "green" : "red";
               return (
                 <tr
-                  className="row-value"
+                  key={coinRow?.id}
+                  className="row-value-item"
                   onClick={() => history.push(`/coins/${coinRow.id}`)}
-                ></tr>
+                >
+                  <th className="coin-cell">
+                    <img
+                      src={coinRow?.image}
+                      alt={coinRow.name}
+                      className="table-cell-img"
+                    />
+                    <div className="table-cell-coin-text-container">
+                      <span className="fetched-symbol">
+                        {coinRow.symbol.toUpperCase()}
+                      </span>
+                      <span className="fetched-name">{coinRow.name}</span>
+                    </div>
+                  </th>
+                  <td className="align cell">
+                    {symbol}{" "}
+                    {numberWithCommas(coinRow.current_price.toFixed(2))}
+                  </td>
+                  <td className={`align ${profitColor}`}>
+                    {profit && "+"}
+                    {coinRow.price_change_percentage_24h.toFixed(2)}%
+                  </td>
+                  <td className="align cell">
+                    {symbol}{" "}
+                    {numberWithCommas(
+                      coinRow.market_cap.toString().slice(0, -6)
+                    )}
+                    M
+                  </td>
+                </tr>
               );
             })}
           </tbody>
         </table>
       </div>
+      <Pagination
+        coinsList={onChangeSearchResults()}
+        pageHandler={pageHandler}
+      />
     </div>
   );
 };
