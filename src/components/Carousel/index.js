@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { CryptoState } from "../../Context/CryptoContext";
 import { TrendingCoins } from "../../config/api";
 
+import { ThreeDots } from "react-loader-spinner";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 
@@ -11,6 +12,7 @@ import "./index.css";
 
 const Carousel = () => {
   const [trending, setTrending] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { currency, symbol } = CryptoState();
 
   const getTrendingData = async () => {
@@ -19,9 +21,11 @@ const Carousel = () => {
       const response = await fetch(TrendingCoins(currency));
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
+      } else {
+        const data = await response.json();
+        setTrending(data);
+        setIsLoading(false);
       }
-      const data = await response.json();
-      setTrending(data);
     } catch (error) {
       console.error("Failed to Fetch:-", error);
     }
@@ -73,19 +77,32 @@ const Carousel = () => {
 
   return (
     <div className="carousel-container">
-      <AliceCarousel
-        key={items.length}
-        autoWidth
-        mouseTracking
-        infinite
-        autoPlayInterval={1000}
-        animationDuration={1500}
-        disableDotsControls
-        disableButtonsControls
-        responsive={responsive}
-        items={items}
-        autoPlay
-      />
+      {isLoading ? (
+        <ThreeDots
+          visible={true}
+          height="80"
+          width="120"
+          color="#ffffff"
+          radius="9"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      ) : (
+        <AliceCarousel
+          key={items.length}
+          autoWidth
+          mouseTracking
+          infinite
+          autoPlayInterval={1000}
+          animationDuration={1500}
+          disableDotsControls
+          disableButtonsControls
+          responsive={responsive}
+          items={items}
+          autoPlay
+        />
+      )}
     </div>
   );
 };

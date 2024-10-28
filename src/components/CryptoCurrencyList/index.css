@@ -100,3 +100,7 @@
 .left {
   padding-left: 50px;
 }
+.loading-view {
+  display: flex;
+  justify-content: center;
+}

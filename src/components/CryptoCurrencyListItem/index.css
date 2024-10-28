@@ -1,3 +1,11 @@
+.loader-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
 .crypto-list-item-container {
   background-size: cover;
   height: 100vh;
@@ -7,10 +15,12 @@
   overflow-y: hidden;
 }
 .side-bar {
-  width: 30%;
+  width: 35%;
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 .side-bar-img {
@@ -27,9 +37,40 @@
   text-align: justify;
   font-size: 16px;
   font-weight: 100;
+  margin-top: 15px;
   /* word-wrap: break-word; */
+}
+
+.Rank-container,
+.current-price-container,
+.market-cap-container {
+  margin-top: 15px;
+}
+
+.Rank-text,
+.current-price-text,
+.market-cap-text {
+  font-size: 20px;
 }
 .item-value {
   font-weight: 100;
   font-family: "Montserrat";
+}
+.vertical-line {
+  height: 100%;
+  left: 50%;
+  margin-left: -3px;
+  top: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .crypto-list-item-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .vertical-line {
+    display: none;
+  }
 }
