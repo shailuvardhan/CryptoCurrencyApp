@@ -1,12 +1,19 @@
 import { useHistory } from "react-router-dom";
 
+import Cookies from "js-cookie";
 import "./index.css";
 import MainLogo from "../../Assets/Images/MainLogo.png";
+
 import { CryptoState } from "../../Context/CryptoContext";
 
 const Header = () => {
   const history = useHistory();
   const { currency, setCurrency } = CryptoState();
+
+  const onClickLogout = () => {
+    Cookies.remove("jwt_token");
+    history.replace("/login");
+  };
 
   return (
     <div className="header-container">
@@ -20,15 +27,24 @@ const Header = () => {
         <strong className="Main-heading">Crypto Tracker</strong>
       </div>
 
-      <select
-        className="select-container"
-        value={currency}
-        onChange={(e) => setCurrency(e.target.value)}
-        // onChange={onChangedCurrency}
-      >
-        <option value="INR">INR</option>
-        <option value="USD">USD</option>
-      </select>
+      <div>
+        <select
+          className="select-container"
+          value={currency}
+          onChange={(e) => setCurrency(e.target.value)}
+          // onChange={onChangedCurrency}
+        >
+          <option value="INR">INR</option>
+          <option value="USD">USD</option>
+        </select>
+        <button
+          type="button"
+          className="logout-desktop-btn"
+          onClick={onClickLogout}
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 };

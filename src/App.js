@@ -1,16 +1,26 @@
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
+import LoginForm from "./components/LoginForm";
 import Home from "./components/Home";
-import Header from "./components/Header";
 import CryptoCurrencyListItem from "./components/CryptoCurrencyListItem";
+import NotFound from "./components/NotFound";
+import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 
 const App = () => (
   <BrowserRouter>
     <div className="App-container">
-      <Header />
-      <Route exact path="/" component={Home} />
-      <Route exact path="/coins/:id" component={CryptoCurrencyListItem} />
+      <Switch>
+        <Route exact path="/login" component={LoginForm} />
+        <ProtectedRoute exact path="/" component={Home} />
+        <ProtectedRoute
+          exact
+          path="/coins/:id"
+          component={CryptoCurrencyListItem}
+        />
+        <Route path="/not-found" component={NotFound} />
+        <Redirect to="not-found" />
+      </Switch>
     </div>
   </BrowserRouter>
 );

@@ -7,6 +7,7 @@ specifiers:
   axios: ^1.7.7
   buffer: ^6.0.3
   chart.js: ^4.4.5
+  js-cookie: ^3.0.5
   react: ^18.3.1
   react-alice-carousel: ^2.9.1
   react-chartjs-2: ^5.2.0
@@ -27,6 +28,7 @@ dependencies:
   '@testing-library/user-event': 13.5.0
   axios: 1.7.7
   chart.js: 4.4.5
+  js-cookie: 3.0.5
   react: 18.3.1
   react-alice-carousel: 2.9.1_react@18.3.1
   react-chartjs-2: 5.2.0_chart.js@4.4.5+react@18.3.1
@@ -6996,6 +6998,11 @@ packages:
   /jiti/1.21.6:
     resolution: {integrity: sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==}
     hasBin: true
+    dev: false
+
+  /js-cookie/3.0.5:
+    resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
+    engines: {node: '>=14'}
     dev: false
 
   /js-tokens/4.0.0:

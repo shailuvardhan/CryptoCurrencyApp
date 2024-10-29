@@ -42,3 +42,16 @@ option {
   background-color: #14161a;
   color: #fff;
 }
+.logout-desktop-btn {
+  font-weight: 600;
+  font-size: 16px;
+  width: 100px;
+  padding: 8px 16px;
+  color: #000;
+  background-color: gold;
+  border: none;
+  border-radius: 4px;
+  margin-left: 14px;
+  cursor: pointer;
+  outline: none;
+}
