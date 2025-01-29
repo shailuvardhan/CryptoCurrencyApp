@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Cookies from "js-cookie";
-import { Redirect } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 
 import CryptoLogo from "../../Assets/Images/cryptocoin-01_kkfzb5.jpg";
 import "./index.css";
@@ -45,9 +44,12 @@ const LoginForm = () => {
   const submitForm = async (event) => {
     event.preventDefault();
     const userDetails = { username, password };
-    const url = "https://apis.ccbp.in/login";
+    const url = "https://logincredentials-backend.onrender.com/login";
     const options = {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(userDetails),
     };
     const response = await fetch(url, options);
@@ -67,7 +69,7 @@ const LoginForm = () => {
       <input
         type="password"
         id="password"
-        className="password-input-field"
+        className="input-field"
         value={password}
         onChange={onChangePassword}
         placeholder="Password"
@@ -83,7 +85,7 @@ const LoginForm = () => {
       <input
         type="text"
         id="username"
-        className="username-input-field"
+        className="input-field"
         value={username}
         onChange={onChangeUsername}
         placeholder="Username"
@@ -109,6 +111,12 @@ const LoginForm = () => {
           Login
         </button>
         {showSubmitError && <p className="error-message">*{errorMsg}</p>}
+        <p className="signUp-tag">
+          Don't have an account?
+          <Link className="undertag" to="/signup">
+            Signup
+          </Link>
+        </p>
       </form>
     </div>
   );
